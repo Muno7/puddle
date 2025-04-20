@@ -1,0 +1,186 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Puddle - Buy and sell items in your community">
+        
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: {
+                                50: '#f0fdfa',
+                                100: '#ccfbf1',
+                                200: '#99f6e4',
+                                300: '#5eead4',
+                                400: '#2dd4bf',
+                                500: '#14b8a6',
+                                600: '#0d9488',
+                                700: '#0f766e',
+                                800: '#115e59',
+                                900: '#134e4a',
+                            }
+                        },
+                        fontFamily: {
+                            sans: ['Inter', 'sans-serif'],
+                        },
+                    }
+                }
+            }
+        </script>
+        
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+            
+            body {
+                font-family: 'Inter', sans-serif;
+            }
+        </style>
+
+        <title>{% block title %}{% endblock %} | Puddle</title>
+    </head>
+
+    <body class="min-h-screen flex flex-col bg-gray-50">
+        <nav class="py-4 px-6 md:px-12 flex justify-between items-center border-b border-gray-200 bg-white shadow-sm">
+            <a href="/" class="flex items-center gap-2 text-xl font-bold text-primary-600">
+                <i class="fas fa-water text-primary-500 text-2xl"></i>
+                <span>Puddle</span>
+            </a>
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="" class="text-base font-medium text-gray-700 hover:text-primary-600 transition-colors">
+                    <i class="fas fa-plus-circle mr-1"></i> New item
+                </a>
+                <a href="" class="text-base font-medium text-gray-700 hover:text-primary-600 transition-colors">
+                    <i class="fas fa-search mr-1"></i> Browse
+                </a>
+
+                {% if request.user.is_authenticated %}
+                    <a href="" class="px-5 py-2 text-sm font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors shadow-sm">
+                        <i class="fas fa-inbox mr-1"></i> Inbox
+                    </a>
+                    <a href="" class="px-5 py-2 text-sm font-medium bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors shadow-sm">
+                        <i class="fas fa-tachometer-alt mr-1"></i> Dashboard
+                    </a>
+                {% else %}
+                    <a href="" class="px-5 py-2 text-sm font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors shadow-sm">
+                        <i class="fas fa-user-plus mr-1"></i> Sign up
+                    </a>
+                    <a href="" class="px-5 py-2 text-sm font-medium bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors shadow-sm">
+                        <i class="fas fa-sign-in-alt mr-1"></i> Log in
+                    </a>
+                {% endif %}
+            </div>
+            
+            <!-- Mobile menu button -->
+            <button class="md:hidden text-gray-700 focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </nav>
+        
+        <!-- Mobile menu (hidden by default) -->
+        <div class="hidden md:hidden px-6 py-4 bg-white border-b border-gray-200 space-y-3">
+            <a href="" class="block text-base font-medium text-gray-700 hover:text-primary-600">
+                <i class="fas fa-plus-circle mr-1"></i> New item
+            </a>
+            <a href="" class="block text-base font-medium text-gray-700 hover:text-primary-600">
+                <i class="fas fa-search mr-1"></i> Browse
+            </a>
+            
+            <div class="pt-3 border-t border-gray-200 flex flex-col space-y-2">
+                {% if request.user.is_authenticated %}
+                    <a href="" class="px-4 py-2 text-sm font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-600 text-center">
+                        <i class="fas fa-inbox mr-1"></i> Inbox
+                    </a>
+                    <a href="" class="px-4 py-2 text-sm font-medium bg-gray-600 text-white rounded-lg hover:bg-gray-700 text-center">
+                        <i class="fas fa-tachometer-alt mr-1"></i> Dashboard
+                    </a>
+                {% else %}
+                    <a href="" class="px-4 py-2 text-sm font-medium bg-primary-500 text-white rounded-lg hover:bg-primary-600 text-center">
+                        <i class="fas fa-user-plus mr-1"></i> Sign up
+                    </a>
+                    <a href="" class="px-4 py-2 text-sm font-medium bg-gray-600 text-white rounded-lg hover:bg-gray-700 text-center">
+                        <i class="fas fa-sign-in-alt mr-1"></i> Log in
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <main class="flex-grow px-6 md:px-12 py-8">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer class="bg-gray-800 text-gray-300">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 py-10">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="col-span-2">
+                        <div class="flex items-center gap-2 mb-6">
+                            <i class="fas fa-water text-primary-400 text-2xl"></i>
+                            <span class="text-xl font-bold text-white">Puddle</span>
+                        </div>
+                        
+                        <h3 class="text-lg font-semibold text-gray-300 mb-4">About Us</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. 
+                            Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus 
+                            rhoncus ut eleifend nibh porttitor.
+                        </p>
+                        
+                        <div class="mt-6 flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-300 mb-4">Quick Links</h3>
+                        <ul class="space-y-3">
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    <span>About Us</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="text-gray-400 hover:text-primary-400 transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    <span>Contact</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    <span>Privacy Policy</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    <span>Terms of Use</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-500 text-sm">
+                    <p>&copy; 2023 Puddle. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

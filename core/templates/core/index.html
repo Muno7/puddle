@@ -162,7 +162,7 @@
                         </svg>
                         {{ item.created_at|date:"M d, Y" }}
                     </div>
-                    <a href="" class="text-sm font-medium text-brand-600 hover:text-brand-700">
+                    <a href={% url 'item:detail' item.id %} class="text-sm font-medium text-brand-600 hover:text-brand-700">
                         View details
                     </a>
                 </div>
